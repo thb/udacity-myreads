@@ -45,7 +45,7 @@ const BooksApp = () => {
   const removeBook = (book, bookshelf) => {
     const newList = {}
     newList[bookshelf] = {...bookshelves[bookshelf]}
-    newList[bookshelf].books = bookshelves[bookshelf].books.filter(currentBook => currentBook.title !== book.title )
+    newList[bookshelf].books = bookshelves[bookshelf].books.filter(currentBook => currentBook.id !== book.id )
     setBookshelves(currentBookshelves => ({
       ...currentBookshelves,
       ...newList
@@ -56,7 +56,7 @@ const BooksApp = () => {
   const bookshelfOf = (book) => {
     let bookshelf = null;
     Object.entries(bookshelves).forEach(([key, value]) => {
-      let found = value.books.find(currentBook => currentBook.title === book.title)
+      let found = value.books.find(currentBook => currentBook.id === book.id)
       if (found) {
         bookshelf = key
       }
@@ -76,6 +76,7 @@ const BooksApp = () => {
         <Route path="/add" element={
           <AddBook 
             onAddBook={handleAddBook}
+            bookshelfOf={bookshelfOf}
           />}
         />
       </Routes>
