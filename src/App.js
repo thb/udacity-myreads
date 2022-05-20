@@ -1,17 +1,29 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 // import * as BooksAPI from './BooksAPI'
 import './App.css'
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import AddBook from './AddBook'
 import Bookshelves from './Bookshelves'
 
+const useLocalStorage = (storageKey, fallbackState) => {
+  const [value, setValue] = useState(
+    JSON.parse(localStorage.getItem(storageKey)) ?? fallbackState
+  );
+
+  useEffect(() => {
+    localStorage.setItem(storageKey, JSON.stringify(value));
+  }, [value, storageKey]);
+
+  return [value, setValue];
+};
+
 const BooksApp = () => {
 
-  const [bookshelves, setBookshelves] = useState({
+  const [bookshelves, setBookshelves] = useLocalStorage('bookshelves', {
     currentlyReading: { name: 'Currently Reading', books: []},
     wantToRead: { name: 'Want To Read', books: []},
     read: { name: 'Read', books: []}
-  })
+  });
 
   let navigate = useNavigate()
 
