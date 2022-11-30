@@ -39,7 +39,7 @@ const AddBook = (props) => {
       <div className="search-books-results">
         <ol className="books-grid">
           {results !== undefined && results.map(book =>
-            <Book book={book} key={book.id} onAddBook={props.onAddBook} bookshelf={props.bookshelfOf}/>)
+            <Book book={book} key={book.id} onAddBook={props.onAddBook} />)
           }
         </ol>
       </div>
