@@ -1,14 +1,14 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import Bookshelf from './Bookshelf'
 import { Link } from 'react-router-dom'
 
-const Bookshelves = (props) => {
+const BookshelfList = (props) => {
 
   return(
     <div className="list-books">
       <div>
-        {props.books.map(book => (
-          <span key={book.id}>{book.title}({book.bookshelf})</span>
+        {props.myReads.map(myRead => (
+          <span key={myRead.book.id}>{myRead.book.title}({myRead.shelf})</span>
         ))}
       </div>
       <div className="list-books-title">
@@ -20,7 +20,7 @@ const Bookshelves = (props) => {
             <Bookshelf
               key={bookshelf}
               title={bookshelf}
-              books={props.books.filter(book => book.bookshelf === bookshelf)}
+              books={props.myReads.filter(myRead => myRead.shelf === bookshelf).map(myRead => myRead.book)}
               onAddBook={props.onAddBook}
             />
           ))}
@@ -33,4 +33,4 @@ const Bookshelves = (props) => {
   )
 }
 
-export default Bookshelves
+export default BookshelfList
