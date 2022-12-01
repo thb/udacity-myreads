@@ -2,12 +2,12 @@ import './App.css'
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import AddBook from './AddBook'
 import BookshelfList from './BookshelfList'
-import { useState } from 'react'
+import useLocalStorage from './utils'
 
 const App = () => {
 
   const bookshelves = ['Currently Reading', 'Want to Read', 'Read']
-  const [myReads, setMyReads] = useState([])
+  const [myReads, setMyReads] = useLocalStorage('myReads', [])
 
   const handleAddBook = (book, shelf) => {
     if (bookshelves.includes(shelf)) {
@@ -23,7 +23,6 @@ const App = () => {
 
   const shelfOfBook = (book) => {
     const myRead = findInMyReads(book)[0]
-    console.log(myRead ? myRead.shelf : 'None')
     return myRead ? myRead.shelf : 'None'
   }
 

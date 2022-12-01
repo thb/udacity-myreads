@@ -6,11 +6,6 @@ const BookshelfList = (props) => {
 
   return(
     <div className="list-books">
-      <div>
-        {props.myReads.map(myRead => (
-          <span key={myRead.book.id}>{myRead.book.title}({myRead.shelf})</span>
-        ))}
-      </div>
       <div className="list-books-title">
         <h1>MyReads</h1>
       </div>
