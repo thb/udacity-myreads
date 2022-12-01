@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import Book from './Book'
 import PropTypes from 'prop-types';
+import { Debounce } from 'react-throttle';
+
 
 const AddBook = (props) => {
 
@@ -29,11 +31,13 @@ const AddBook = (props) => {
       <div className="search-books-bar">
         <Link to='/'><button className="close-search">Close</button></Link>
         <div className="search-books-input-wrapper">
-          <input
-            type="text"
-            placeholder="Search by Terms..."
-            onChange={(event) => search(event.target.value)}
-          />
+          <Debounce time="200" handler="onChange">
+            <input
+              type="text"
+              placeholder="Search by Terms..."
+              onChange={(event) => search(event.target.value)}
+            />
+          </Debounce>
 
         </div>
       </div>

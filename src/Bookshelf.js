@@ -19,7 +19,7 @@ const Bookshelf = (props) => {
 }
 
 Bookshelf.propTypes = {
-  name: PropTypes.object.isRequired,
+  name: PropTypes.string.isRequired,
   books: PropTypes.array.isRequired,
   onAddBook: PropTypes.func.isRequired
 }

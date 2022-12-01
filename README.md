@@ -33,23 +33,4 @@ And then add to the shelve you want.
 I'm using Functional Components and React Hooks as I could not
 use the previous version of React Router.
 
-I used a `bookshelves` object in the state at the root of the App.
-
-It has the 3 collections :
-
-```
-const [bookshelves, setBookshelves] = useState({
-    currentlyReading: { name: 'Currently Reading', books: []},
-    wantToRead: { name: 'Want To Read', books: []},
-    read: { name: 'Read', books: []}
-  })
-```
-
-## Optimization
-
-I'm not sure about the performance of the AddBook component because
-each book has to look for its bookshelf in the collection.
-
-It would have been faster to pass directly the books that
-are in a bookshelf to that component but it would have required more
-code.
+I used a `bookshelves` simple array and a myReads object that contains the books with their shelf.

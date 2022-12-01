@@ -1,12 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import PropTypes from 'prop-types';
 
 const Book = (props) => {
-
-  useEffect(() => {
-    console.log(props.bookshelf)
-  })
 
   const navigate = useNavigate();
 
