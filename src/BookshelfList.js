@@ -1,6 +1,7 @@
 import React from 'react'
 import Bookshelf from './Bookshelf'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types';
 
 const BookshelfList = (props) => {
 
@@ -14,7 +15,7 @@ const BookshelfList = (props) => {
           { props.bookshelves.map(bookshelf => (
             <Bookshelf
               key={bookshelf}
-              title={bookshelf}
+              name={bookshelf}
               books={props.myReads.filter(myRead => myRead.shelf === bookshelf).map(myRead => myRead.book)}
               onAddBook={props.onAddBook}
             />
@@ -26,6 +27,12 @@ const BookshelfList = (props) => {
       </div>
     </div>
   )
+}
+
+BookshelfList.propTypes = {
+  bookshelves: PropTypes.array.isRequired,
+  myReads: PropTypes.array.isRequired,
+  onAddBook: PropTypes.func.isRequired
 }
 
 export default BookshelfList

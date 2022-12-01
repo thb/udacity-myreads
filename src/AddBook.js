@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import Book from './Book'
+import PropTypes from 'prop-types';
 
 const AddBook = (props) => {
 
@@ -47,5 +48,9 @@ const AddBook = (props) => {
   )
 }
 
+AddBook.propTypes = {
+  shelfOfBook: PropTypes.func.isRequired,
+  onAddBook: PropTypes.func.isRequired
+}
 
 export default AddBook

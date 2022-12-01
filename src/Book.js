@@ -1,7 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import PropTypes from 'prop-types';
 
 const Book = (props) => {
+
+  useEffect(() => {
+    console.log(props.bookshelf)
+  })
 
   const navigate = useNavigate();
 
@@ -38,6 +43,12 @@ const Book = (props) => {
       </div>
     </li>
   )
+}
+
+Book.propTypes = {
+  book: PropTypes.object.isRequired,
+  bookshelf: PropTypes.string.isRequired,
+  onAddBook: PropTypes.func.isRequired
 }
 
 export default Book
