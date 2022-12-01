@@ -2,7 +2,7 @@ import './App.css'
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import AddBook from './AddBook'
 import BookshelfList from './BookshelfList'
-import useLocalStorage from './utils'
+import { useLocalStorage } from './utils'
 
 const App = () => {
 
