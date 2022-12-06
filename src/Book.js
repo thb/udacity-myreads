@@ -1,6 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import PropTypes from 'prop-types';
+import { titelizeString } from './utils';
 
 const Book = (props) => {
 
@@ -9,7 +10,7 @@ const Book = (props) => {
   const handleChange = (e) => {
     const _bookshelf = e.target.value
     props.onAddBook(props.book, _bookshelf)
-    if (_bookshelf !== 'None') {
+    if (_bookshelf !== 'none') {
       navigate('/')
     }
   }
@@ -22,8 +23,8 @@ const Book = (props) => {
           <div className="book-shelf-changer">
             <select value={props.bookshelf} onChange={handleChange}>
               <option disabled>Move to...</option>
-              {['Currently Reading', 'Want to Read', 'Read', 'None'].map((bookshelf) => (
-                <option key={bookshelf} value={bookshelf}>{bookshelf}</option>
+              {['currentlyReading', 'wantToRead', 'read', 'none'].map((bookshelf) => (
+                <option key={bookshelf} value={bookshelf}>{titelizeString(bookshelf)}</option>
               ))}
             </select>
           </div>

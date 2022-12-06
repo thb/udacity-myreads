@@ -12,11 +12,11 @@ const BookshelfList = (props) => {
       </div>
       <div className="list-books-content">
         <div>
-          { props.bookshelves.map(bookshelf => (
+          { Object.entries(props.myReads).map(([shelf, books]) => (
             <Bookshelf
-              key={bookshelf}
-              name={bookshelf}
-              books={props.myReads.filter(myRead => myRead.shelf === bookshelf).map(myRead => myRead.book)}
+              key={shelf}
+              shelf={shelf}
+              books={books}
               onAddBook={props.onAddBook}
             />
           ))}
@@ -30,8 +30,7 @@ const BookshelfList = (props) => {
 }
 
 BookshelfList.propTypes = {
-  bookshelves: PropTypes.array.isRequired,
-  myReads: PropTypes.array.isRequired,
+  myReads: PropTypes.object.isRequired,
   onAddBook: PropTypes.func.isRequired
 }
 

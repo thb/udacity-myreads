@@ -3,18 +3,25 @@ import { Routes, Route, useNavigate } from 'react-router-dom'
 import AddBook from './AddBook'
 import BookshelfList from './BookshelfList'
 import { useLocalStorage } from './utils'
+import * as BooksAPI from './BooksAPI'
+import { useEffect } from 'react'
 
 const App = () => {
 
-  const bookshelves = ['Currently Reading', 'Want to Read', 'Read']
-  const [myReads, setMyReads] = useLocalStorage('myReads', [])
+  const [myReads, setMyReads] = useLocalStorage('myReads', {currentlyReading: [], wantToRead: [], read: []})
+
+  useEffect(() => {
+    BooksAPI.getAll().then((results) => {
+      const _myReads = {currentlyReading: [], wantToRead: [], read: []}
+      results.forEach((book) => {
+        _myReads[book.shelf].push(book)
+      })
+      setMyReads(_myReads)
+    })
+  })
 
   const handleAddBook = (book, shelf) => {
-    if (bookshelves.includes(shelf)) {
-      setMyReads([...myReads.filter(myRead => myRead.book.id !== book.id), {book, shelf}])
-    } else {
-      setMyReads(myReads.filter(myRead => myRead.book.id !== book.id))
-    }
+    updateBook(book, shelf)
   }
 
   const findInMyReads = (book) => {
@@ -26,12 +33,18 @@ const App = () => {
     return myRead ? myRead.shelf : 'None'
   }
 
+  const updateBook = (book, shelf) => {
+    BooksAPI.update(book, shelf)
+      .then((_result) => {
+        console.log(_result)
+      })
+  }
+
   return (
     <div className="app">
       <Routes>
         <Route exact path='/' element={
           <BookshelfList
-            bookshelves={bookshelves}
             myReads={myReads}
             onAddBook={handleAddBook}
           />

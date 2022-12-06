@@ -1,16 +1,17 @@
 import React from 'react'
 import Book from './Book'
 import PropTypes from 'prop-types';
+import { titelizeString } from './utils';
 
 const Bookshelf = (props) => {
 
   return(
     <div className="bookshelf">
-      <h2 className="bookshelf-title">{props.name}</h2>
+      <h2 className="bookshelf-title">{titelizeString(props.shelf)}</h2>
       <div className="bookshelf-books">
         <ol className="books-grid">
           { props.books.map(book => (
-            <Book book={book} key={book.id} bookshelf={props.name} onAddBook={props.onAddBook} />
+            <Book book={book} key={book.id} bookshelf={props.shelf} onAddBook={props.onAddBook} />
           ))}
         </ol>
       </div>

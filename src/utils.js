@@ -12,4 +12,11 @@ const useLocalStorage = (storageKey, fallbackState) => {
   return [value, setValue]
 };
 
-export { useLocalStorage }
+const titelizeString = (str) => {
+  const text = str;
+  const result = text.replace(/([A-Z])/g, " $1");
+  const finalResult = result.charAt(0).toUpperCase() + result.slice(1);
+  return finalResult;
+}
+
+export { useLocalStorage, titelizeString }
