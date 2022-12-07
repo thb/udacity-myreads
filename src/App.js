@@ -11,8 +11,8 @@ const App = () => {
   const [myReads, setMyReads] = useLocalStorage('myReads', {currentlyReading: [], wantToRead: [], read: []})
 
   useEffect(() => {
+    const _myReads = {currentlyReading: [], wantToRead: [], read: []}
     BooksAPI.getAll().then((results) => {
-      const _myReads = {currentlyReading: [], wantToRead: [], read: []}
       results.forEach((book) => {
         _myReads[book.shelf].push(book)
       })
@@ -24,20 +24,8 @@ const App = () => {
     updateBook(book, shelf)
   }
 
-  const findInMyReads = (book) => {
-    return myReads.filter(myRead => myRead.book.id === book.id)
-  }
-
-  const shelfOfBook = (book) => {
-    const myRead = findInMyReads(book)[0]
-    return myRead ? myRead.shelf : 'None'
-  }
-
   const updateBook = (book, shelf) => {
     BooksAPI.update(book, shelf)
-      .then((_result) => {
-        console.log(_result)
-      })
   }
 
   return (
@@ -50,7 +38,7 @@ const App = () => {
           />
         } />
         <Route path="/add" element={
-          <AddBook onAddBook={handleAddBook} shelfOfBook={shelfOfBook} />
+          <AddBook onAddBook={handleAddBook} myReads={myReads} />
         } />
       </Routes>
     </div>

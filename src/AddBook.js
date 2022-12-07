@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import Book from './Book'
@@ -26,6 +26,19 @@ const AddBook = (props) => {
     }
   }
 
+  const getShelf = (book) => {
+    let myReads = props.myReads
+    let shelf = 'none'
+    Object.keys(myReads).forEach((key) => {
+      myReads[key].forEach((b) => {
+        if (b.id === book.id) {
+          shelf = key
+        }
+      })
+    })
+    return shelf
+  }
+
   return(
     <div className="search-books">
       <div className="search-books-bar">
@@ -44,7 +57,7 @@ const AddBook = (props) => {
       <div className="search-books-results">
         <ol className="books-grid">
           {results !== undefined && results.map(book =>
-            <Book book={book} key={book.id} onAddBook={props.onAddBook} bookshelf={props.shelfOfBook(book)} />)
+            <Book book={book} key={book.id} onAddBook={props.onAddBook} shelf={getShelf(book)} />)
           }
         </ol>
       </div>
@@ -53,7 +66,7 @@ const AddBook = (props) => {
 }
 
 AddBook.propTypes = {
-  shelfOfBook: PropTypes.func.isRequired,
+  myReads: PropTypes.object.isRequired,
   onAddBook: PropTypes.func.isRequired
 }
 
